@@ -1,0 +1,28 @@
+1. Extracted claims:
+Claims 1-18
+
+Corresponding Rejection Paragraph(s) and related claims:
+Paragraph 6 - Claims 1-18 are rejected under 35 U.S.C. 101 as claiming the same invention as that of claims 1-18 of prior U.S. Patent No. 8,430,328 B2 to Yoshida, Applicant (cited by Applicant, hereinafter "328 patent").
+
+List of related references:
+8,430,328 B2 - Paragraph 6
+
+2. U.S. Patent Reference:
+- Patent Number: 8,430,328 B2
+- Designation: 328 patent
+- Citation Type: 35 U.S.C. 101 statutory double patenting rejection
+- Claim number(s): 1-18
+
+3. Bullet list of requirements with cited paragraphs:
+
+• Regarding claim 1, the claim states: "A dot pattern, wherein a plurality of reference points is provided in an area of a block having a predetermined information dot arranged thereon; a plurality of virtual reference points <to be> defined is arranged <from> the reference points; an information dot is arranged, of which information is defined by a distance and a direction from the virtual reference point; and at least the information dot at the predetermined position is made into a direction dot showing the direction of the block by a direction from the virtual reference point." (Paragraphs 24-29)
+
+• Claim 1 of the <cited> 328 patent recites: "A dot pattern, wherein a plurality of reference points are provided in an area of a block having at least one information dot arranged thereon; and a plurality of virtual reference points are defined by the reference points; <wherein information of the at least> one information dot is defined by a distance and a direction from at least one of the virtual reference points; <and wherein> the at least one information dot is made into a direction dot showing a direction of the block by a direction in which the at least one information dot is disposed relative to at least one of the virtual reference points." (Paragraphs 30-38)
+
+• The underlined sections of the claims are different from each other. The differences are conjunctional or prepositional words. In fact, claim 1 of the instant application is not modifying any element of claim 1 of the 328 patent. (Paragraph 39)
+
+• Moreover, claims 2-18 of the instant application are verbatim copies of claims 2-18 of the 328 patent except for some punctuation marks such as commas and semi-colons. (Paragraph 40)
+
+4. Bullet list of requirements with cited paragraphs:
+
+• There are no paragraphs in the "Drawing" or "Specification" sections that contain the key phrases "is objected to because", "it is suggested", "appropriate correction is required", or "informalities".

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uspat:OutgoingDocument
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:uspat="urn:us:gov:doc:uspto:patent"
+    xmlns="urn:us:gov:doc:uspto:patent"
+    xmlns:com="http://www.wipo.int/standards/XMLSchema/ST96/Common" xmlns:uscom="urn:us:gov:doc:uspto:common"
+    xmlns:mml="http://www.w3.org/1998/Math/MathML"
+    uscom:formParagraphMinMatchPercent="78.5"
+    xsi:schemaLocation="urn:us:gov:doc:uspto:patent ..\PE2E\V7_1\Schema\USPatent\Document\OutgoingDocument_V7_1.xsd"
+    com:documentFileName="Non-Final Rejection.DOCM" com:id="ID_1" uscom:vendorName="OA2XML" uscom:createDateTime="2016-12-23T18:36:47"
+    com:st96Version="V2_1" com:ipoVersion="US_V7_1">
+
+    <uspat:DocumentMetadata com:id="id-002">
+        <uscom:DocumentCode>CTNF</uscom:DocumentCode>
+        <uscom:ApplicationNumberText uscom:electronicText="15218841">15/218,841</uscom:ApplicationNumberText>
+        <uscom:DocumentSourceIdentifier>CTNF</uscom:DocumentSourceIdentifier>
+        <com:PartyIdentifier>78613</com:PartyIdentifier>
+        <uscom:GroupArtUnitNumber>2876</uscom:GroupArtUnitNumber>
+        <uscom:DefaultFont uscom:fontMeasureUnitCode="Pt" uscom:fontFamilyName="Arial" uscom:fontSizeNumber="12.00"/>
+    </uspat:DocumentMetadata>
+
+<uscom:P com:pNumber="1" com:id="p-001" uscom:alignmentCategory="center"><uscom:Font uscom:fontFamilyName="Times New Roman"><?PageStart number='1'?><uscom:BoundaryDataReference com:idref="bd-001" /><com:B>DETAILED ACTION</com:B></uscom:Font></uscom:P>
+<uscom:P com:pNumber="5" com:id="p-005" uscom:alignmentCategory="center"></uscom:P>
+<uscom:P com:pNumber="6" com:id="p-006"><uscom:Font uscom:fontFamilyName="Times New Roman">1.	This is the first action relating to U.S. Application Serial No. 15/218,841 filed on July 25, 2016.  Currently claims 1-18 remain in the examination. </uscom:Font></uscom:P>
+<uscom:P com:pNumber="7" com:id="p-007"></uscom:P>
+<uscom:P com:pNumber="8" com:id="p-008" uscom:alignmentCategory="center"><uscom:Font uscom:fontFamilyName="Times New Roman"><com:B><com:I>Notice of Pre-AIA or AIA Status</com:I></com:B></uscom:Font></uscom:P>
+<uscom:FormParagraph com:id="fp-001" uscom:versionIdentifier="4.2" uscom:revisionNumber="4" uscom:revisionDate="2014-03-19" uscom:editionNumber="2" uscom:beginEffectiveDate="2014-03-19" uscom:endEffectiveDate="2017-10-10"><uscom:FormParagraphNumber com:id="fpn-001" uscom:versionIdentifier="4.2" uscom:revisionNumber="4" uscom:editionNumber="2" uscom:matchPercent="100">07-03-fti</uscom:FormParagraphNumber><uscom:FormParagraphCategory><uscom:ExaminationProgramCode>AIA</uscom:ExaminationProgramCode></uscom:FormParagraphCategory><uscom:P com:pNumber="9" com:id="p-009"><uscom:Font uscom:fontFamilyName="Times New Roman">2.	The present application is being examined under the pre-AIA first to invent provisions. </uscom:Font></uscom:P>
+</uscom:FormParagraph><uscom:P com:pNumber="10" com:id="p-010"></uscom:P>
+<uscom:P com:pNumber="11" com:id="p-011"><uscom:Font uscom:fontFamilyName="Times New Roman">3.	Applicant’s disclosure of related application information is acknowledged. </uscom:Font></uscom:P>
+<uscom:P com:pNumber="12" com:id="p-012"></uscom:P>
+<uscom:P com:pNumber="13" com:id="p-013" uscom:alignmentCategory="center"><uscom:Font uscom:fontFamilyName="Times New Roman"><com:B><com:I>Priority</com:I></com:B></uscom:Font></uscom:P>
+<uscom:P com:pNumber="14" com:id="p-014"></uscom:P>
+<uscom:FormParagraph com:id="fp-002" uscom:versionIdentifier="4.2" uscom:revisionNumber="4" uscom:revisionDate="2007-01-01" uscom:editionNumber="2" uscom:beginEffectiveDate="2007-01-01" uscom:endEffectiveDate="2013-10-11"><uscom:FormParagraphNumber com:id="fpn-002" uscom:versionIdentifier="3.5" uscom:revisionNumber="3" uscom:editionNumber="5" uscom:matchPercent="100">02-26</uscom:FormParagraphNumber><uscom:P com:pNumber="15" com:id="p-015"><uscom:Font uscom:fontFamilyName="Times New Roman">4.	Receipt is acknowledged of papers submitted under 35 U.S.C. 119(a)-(d), which papers have been placed of record in the file.</uscom:Font></uscom:P>
+</uscom:FormParagraph><uscom:P com:pNumber="16" com:id="p-016"></uscom:P>
+<uscom:P com:pNumber="17" com:id="p-017" uscom:alignmentCategory="center"><uscom:Font uscom:fontFamilyName="Times New Roman"><com:B><com:I>Statutory Double Patenting</com:I></com:B></uscom:Font></uscom:P>
+<uscom:FormParagraph com:id="fp-003" uscom:versionIdentifier="4.2" uscom:revisionNumber="4" uscom:revisionDate="2016-05-26" uscom:editionNumber="2" uscom:beginEffectiveDate="2016-05-26" uscom:endEffectiveDate="2017-10-10"><uscom:FormParagraphNumber com:id="fpn-003" uscom:versionIdentifier="4.2" uscom:revisionNumber="4" uscom:editionNumber="2" uscom:matchPercent="99.5">08-30</uscom:FormParagraphNumber><uscom:FormParagraphCategory><uscom:ExaminationProgramCode>AIA</uscom:ExaminationProgramCode></uscom:FormParagraphCategory><uscom:P com:pNumber="18" com:id="p-018"><uscom:Font uscom:fontFamilyName="Times New Roman">5.	A rejection based on double patenting of the “same invention” type finds its support in the language of 35 U.S.C. 101 which states that “whoever invents or discovers any new and useful process… may obtain a patent therefor…” (Emphasis added). Thus, the term “same invention,” in this context, means an invention drawn to identical subject matter. See <com:I>Miller v. Eagle Mfg. Co.</com:I>, 151 U.S. 186 (1894); <com:I>In re Vogel</com:I>, 422 F.2d 438, 164 USPQ 619 (CCPA 1970); <com:I>In re Ockert</com:I>, 245 F.2d 467, 114 USPQ 330 (CCPA 1957).</uscom:Font></uscom:P>
+<uscom:P com:pNumber="19" com:id="p-019" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman"><?PageStart number='2'?><uscom:BoundaryDataReference com:idref="bd-002" />A statutory type (35 U.S.C. 101) double patenting rejection can be overcome by canceling or amending the claims that are directed to the same invention so they are no longer coextensive in scope. <com:U>The filing of a terminal disclaimer cannot overcome a double patenting rejection based upon 35 U.S.C. 101.</com:U></uscom:Font></uscom:P>
+</uscom:FormParagraph><uscom:FormParagraph com:id="fp-004" uscom:versionIdentifier="4.2" uscom:revisionNumber="4" uscom:revisionDate="2013-10-12" uscom:editionNumber="2" uscom:beginEffectiveDate="2013-10-12" uscom:endEffectiveDate="2016-05-25"><uscom:FormParagraphNumber com:id="fpn-004" uscom:versionIdentifier="4.0" uscom:revisionNumber="4" uscom:editionNumber="0" uscom:matchPercent="100">08-31</uscom:FormParagraphNumber><uscom:FormParagraphCategory><uscom:ExaminationProgramCode>AIA</uscom:ExaminationProgramCode></uscom:FormParagraphCategory><uscom:P com:pNumber="23" com:id="p-023"><uscom:Font uscom:fontFamilyName="Times New Roman">6.	Claim</uscom:Font><uscom:DataField com:id="df001" uscom:dataFieldNumber="1"><uscom:GeneralText><uscom:Font uscom:fontFamilyName="Times New Roman">s 1-18 are</uscom:Font></uscom:GeneralText></uscom:DataField><uscom:Font uscom:fontFamilyName="Times New Roman"> rejected under 35 U.S.C. 101 as claiming the same invention as that of claim</uscom:Font><uscom:DataField com:id="df002" uscom:dataFieldNumber="2"><uscom:GeneralText><uscom:Font uscom:fontFamilyName="Times New Roman">s 1-18</uscom:Font></uscom:GeneralText></uscom:DataField><uscom:Font uscom:fontFamilyName="Times New Roman"> of prior U.S. Patent No. </uscom:Font><uscom:DataField com:id="df003" uscom:dataFieldNumber="3"><uscom:GeneralText><uscom:Font uscom:fontFamilyName="Times New Roman">8,430,328 B2 to Yoshida, Applicant (cited by Applicant, hereinafter “328 patent”)</uscom:Font></uscom:GeneralText></uscom:DataField><uscom:Font uscom:fontFamilyName="Times New Roman">.  This is a statutory double patenting rejection.</uscom:Font></uscom:P>
+</uscom:FormParagraph><uscom:P com:pNumber="24" com:id="p-024"><uscom:Font uscom:fontFamilyName="Times New Roman">	Claim 1 of the instant application states: </uscom:Font></uscom:P>
+<uscom:P com:pNumber="25" com:id="p-025" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">A dot pattern,</uscom:Font></uscom:P>
+<uscom:P com:pNumber="26" com:id="p-026" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">wherein a plurality of reference points is provided in an area of a block having a predetermined information dot arranged thereon;</uscom:Font></uscom:P>
+<uscom:P com:pNumber="27" com:id="p-027" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">a plurality of virtual reference points <com:U>to be</com:U> defined is arranged <com:U>from</com:U> the reference points;</uscom:Font></uscom:P>
+<uscom:P com:pNumber="28" com:id="p-028" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">an information dot is arranged, of which information is defined by a distance and a direction from the virtual reference point; and</uscom:Font></uscom:P>
+<uscom:P com:pNumber="29" com:id="p-029" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">at least the information dot at the predetermined position is made into a direction dot showing the direction of the block by a direction from the virtual reference point.</uscom:Font></uscom:P>
+<uscom:P com:pNumber="30" com:id="p-030" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">Claim 1 of 328 patent recites:</uscom:Font></uscom:P>
+<uscom:P com:pNumber="31" com:id="p-031" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">A dot pattern, </uscom:Font></uscom:P>
+<uscom:P com:pNumber="32" com:id="p-032" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">wherein a plurality of reference points are provided in an area of a block having at least one information dot arranged thereon;  <com:U>and </com:U></uscom:Font></uscom:P>
+<uscom:P com:pNumber="33" com:id="p-033" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">a plurality of virtual reference points are defined by the reference points;  </uscom:Font></uscom:P>
+<uscom:P com:pNumber="34" com:id="p-034" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman"><?PageStart number='3'?><uscom:BoundaryDataReference com:idref="bd-003" /><com:U>wherein information of the at least</com:U> one information dot is defined by a distance and a direction from at least one of the virtual reference points;  </uscom:Font></uscom:P>
+<uscom:P com:pNumber="38" com:id="p-038" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman"><com:U>and wherein</com:U> the at least one information dot is made into a direction dot showing a direction of the block by a direction in which the at least one information dot is disposed relative to at least one of the virtual reference points. </uscom:Font></uscom:P>
+<uscom:P com:pNumber="39" com:id="p-039" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">Underlined sections of the claims are different from each other.  The difference are conjunctional or prepositional words.  In fact claim 1 of the instant application is not modifying any element of claim 1 of 328 patent.  </uscom:Font></uscom:P>
+<uscom:P com:pNumber="40" com:id="p-040" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">Moreover, claims 2-18 of the instant appellation are verbatim copy of claims 2-18 of 328 patent except some punctuation marks such as commas and semi-colons.  </uscom:Font></uscom:P>
+<uscom:P com:pNumber="41" com:id="p-041"></uscom:P>
+<uscom:P com:pNumber="42" com:id="p-042" uscom:alignmentCategory="center"><uscom:Font uscom:fontFamilyName="Times New Roman"><com:B><com:I>Conclusion</com:I></com:B></uscom:Font></uscom:P>
+<uscom:P com:pNumber="43" com:id="p-043" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">The pertinent prior arts made of record but not relied are listed in the attached form PTO-892.  These are considered pertinent to Applicant&apos;s disclosure.  Applicant is respectfully suggested to carefully review these references.</uscom:Font></uscom:P>
+<uscom:P com:pNumber="44" com:id="p-044" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">Any inquiry concerning this communication or earlier communications from the examiner should be directed to <com:I>Ahshik Kim</com:I> whose telephone number is (571)272-2393.  The examiner can normally be reached between the hours of 8:00 AM to 5:00 PM Monday thru Friday.  Examiner’s fax phone number is (571)273-2393.</uscom:Font></uscom:P>
+<uscom:P com:pNumber="45" com:id="p-045"></uscom:P>
+<uscom:P com:pNumber="46" com:id="p-046"><uscom:Font uscom:fontFamilyName="Times New Roman">	If attempts to reach the examiner by telephone are unsuccessful, the examiner&apos;s supervisor, Michael G. Lee, can be reached on (571)272-2398.  The fax phone number for this Group is (571)273-8300. </uscom:Font></uscom:P>
+<uscom:P com:pNumber="47" com:id="p-047"></uscom:P>
+<uscom:P com:pNumber="48" com:id="p-048"><uscom:Font uscom:fontFamilyName="Times New Roman">	Communications via Internet e-mail regarding this application, other than those under 35 U.S.C. 132 or which otherwise require a signature, may be used by the applicant and should be addressed to [ahshik.kim@uspto.gov]. </uscom:Font></uscom:P>
+<uscom:P com:pNumber="49" com:id="p-049"></uscom:P>
+<uscom:P com:pNumber="50" com:id="p-050"><uscom:Font uscom:fontFamilyName="Times New Roman">	 <com:I>PTO employees do not engage in Internet communications where there exists a possibility that sensitive information could be identified or exchanged unless the record includes </com:I><?PageStart number='4'?><uscom:BoundaryDataReference com:idref="bd-004" /><com:I>a properly signed express waiver of the confidentiality requirements of 35 U.S.C. 122.  This is more clearly set forth in the Interim Internet Usage Policy published in the Official Gazette of the Patent and Trademark on February 25, 1997 at 1195 OG 89.</com:I></uscom:Font></uscom:P>
+<uscom:P com:pNumber="54" com:id="p-054"></uscom:P>
+<uscom:P com:pNumber="55" com:id="p-055" uscom:indentationMeasureUnitCode="Pt" uscom:firstLineIndentationNumber="36.00"><uscom:Font uscom:fontFamilyName="Times New Roman">Information regarding the status of an application may be obtained from the Patent Application Information Retrieval (PAIR) system.  Status information for published applications may be obtained from either Private PAIR or Public PAIR.  Status information for unpublished applications is available through Private PAIR only.  For more information about the PAIR system, see http://pair-direct.uspto.gov. Should you have questions on access to the Private PAIR system, contact the Electronic Business Center (EBC) at 866-217-9197 (toll-free). If you would like assistance from a USPTO Customer Service Representative or access to the automated information system, call 800-786-9199 (IN USA OR CANADA) or 571-272-1000.</uscom:Font></uscom:P>
+<uscom:P com:pNumber="56" com:id="p-056"></uscom:P>
+<uscom:P com:pNumber="57" com:id="p-057"><uscom:Font uscom:fontFamilyName="Times New Roman">						</uscom:Font></uscom:P>
+<uscom:P com:pNumber="58" com:id="p-058"><uscom:Font uscom:fontFamilyName="Times New Roman">/AHSHIK KIM/</uscom:Font></uscom:P>
+<uscom:P com:pNumber="59" com:id="p-059"><uscom:Font uscom:fontFamilyName="Times New Roman">Primary Examiner, Art Unit 2876</uscom:Font></uscom:P>
+<uscom:P com:pNumber="60" com:id="p-060"></uscom:P>
+<uscom:P com:pNumber="61" com:id="p-061"><uscom:Font uscom:fontFamilyName="Times New Roman">December 20, 2016</uscom:Font></uscom:P>
+<uscom:P com:pNumber="62" com:id="p-062"></uscom:P>
+
+
+    <uscom:BoundaryDataBag>
+        <uscom:BoundaryData com:id="bd-001">
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:Font uscom:fontFamilyName="Times New Roman">Application/Control Number: </uscom:Font></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:ApplicationNumberText>15/218,841</uscom:ApplicationNumberText></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="right"><uscom:Font uscom:fontFamilyName="Times New Roman">Page 2</uscom:Font></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:Font uscom:fontFamilyName="Times New Roman">Art Unit: </uscom:Font></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:GroupArtUnitNumber>2876</uscom:GroupArtUnitNumber></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="right"></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+        </uscom:BoundaryData>
+        <uscom:BoundaryData com:id="bd-002">
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:Font uscom:fontFamilyName="Times New Roman">Application/Control Number: </uscom:Font></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:ApplicationNumberText>15/218,841</uscom:ApplicationNumberText></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="right"><uscom:Font uscom:fontFamilyName="Times New Roman">Page 3</uscom:Font></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:Font uscom:fontFamilyName="Times New Roman">Art Unit: </uscom:Font></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:GroupArtUnitNumber>2876</uscom:GroupArtUnitNumber></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="right"></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+        </uscom:BoundaryData>
+        <uscom:BoundaryData com:id="bd-003">
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:Font uscom:fontFamilyName="Times New Roman">Application/Control Number: </uscom:Font></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:ApplicationNumberText>15/218,841</uscom:ApplicationNumberText></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="right"><uscom:Font uscom:fontFamilyName="Times New Roman">Page 4</uscom:Font></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:Font uscom:fontFamilyName="Times New Roman">Art Unit: </uscom:Font></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:GroupArtUnitNumber>2876</uscom:GroupArtUnitNumber></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="right"></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+        </uscom:BoundaryData>
+        <uscom:BoundaryData com:id="bd-004">
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:Font uscom:fontFamilyName="Times New Roman">Application/Control Number: </uscom:Font></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:ApplicationNumberText>15/218,841</uscom:ApplicationNumberText></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="right"><uscom:Font uscom:fontFamilyName="Times New Roman">Page 5</uscom:Font></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:Font uscom:fontFamilyName="Times New Roman">Art Unit: </uscom:Font></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="left"><uscom:GroupArtUnitNumber>2876</uscom:GroupArtUnitNumber></uscom:HeaderText>
+<uscom:HeaderText uscom:alignmentCategory="right"></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+            <uscom:SpannedBoundaryData>
+<uscom:HeaderText uscom:alignmentCategory="left"></uscom:HeaderText>
+            </uscom:SpannedBoundaryData>
+        </uscom:BoundaryData>
+    </uscom:BoundaryDataBag>
+</uspat:OutgoingDocument>

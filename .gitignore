@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+# IDE and OS files
+.DS_Store          # macOS
+Thumbs.db          # Windows
+.idea/             # IntelliJ IDEA
+.vscode/           # VS Code (but you might want to keep settings.json)
+
+# Distribution/build files
+dist/
+build/
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Optional: If you have large files you don't want in Git
+# large_files/

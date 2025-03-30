@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Patent Downloader UI</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column; 
+    }
+    .container {
+      display: flex; 
+      flex-grow: 1; 
+    }
+    .left, .right {
+      width: 50%;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      overflow-y: auto; 
+    }
+    .top {
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    .pdf-viewer {
+      width: 100%;
+      height: 500px; 
+      overflow-y: auto;
+      border: 1px solid #ccc;
+    }
+    .file-input-container {
+      display: flex;
+      align-items: center; 
+      margin-bottom: 10px;
+    }
+    .file-input-container input[type="text"] {
+      margin-left: 10px; 
+      flex-grow: 1; 
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .search-container input[type="text"] {
+      flex-grow: 1;
+      margin-left: 10px;
+    }
+    /* Hide the search container initially */
+    .search-container, #searchResults { 
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="top">
+  <h1>Patent Downloader</h1>
+  <form id="patentForm"> 
+    <input type="text" id="patentNumber" placeholder="Enter patent number" />
+    <button type="submit">Submit</button>
+    <div class="error" id="error-message"></div>
+    <div id="message"></div>  </form>
+</div>
+
+<div class="container">
+  <div class="left">
+    <h2>PDF Viewer</h2>
+    <div class="file-input-container">
+      <input type="file" id="fileInput" accept=".pdf" hidden> <button onclick="document.getElementById('fileInput').click()">Choose File</button>
+      <input type="text" id="chosenFile" value="No file chosen" readonly>
+    </div>
+    <div class="pdf-viewer"></div> 
+  </div>
+
+  <div class="right">
+    <h2>Text Viewer</h2> 
+    <div id="textViewerMessage">Choose a PDF first</div> 
+    <div class="search-container">
+      <span>I want to search for:</span>
+      <input type="text" id="searchInput" placeholder="i.e. Figs. 1-7, Paragraph 3">
+      <button onclick="search()">Search</button>
+    </div>
+    <div id="searchResults"></div> 
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('patentForm');
+  const patentNumberInput = document.getElementById('patentNumber');
+  const pdfViewer = document.querySelector('.pdf-viewer');
+  const errorMessage = document.getElementById('error-message');
+  const message = document.getElementById('message');
+  const chosenFile = document.getElementById('chosenFile');
+  const fileInput = document.getElementById('fileInput');
+
+  const textViewerMessage = document.getElementById('textViewerMessage');
+  const searchContainer = document.querySelector('.search-container');
+  const searchResults = document.getElementById('searchResults');
+
+  fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      chosenFile.value = file.name;
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        pdfViewer.innerHTML = `<iframe src="${e.target.result}" width="100%" height="100%"></iframe>`; 
+        textViewerMessage.style.display = 'none'; 
+        searchContainer.style.display = 'flex';
+        searchResults.style.display = 'block';
+      }
+
+      reader.onerror = (e) => {
+        console.error("Error loading PDF:", e);
+        pdfViewer.innerHTML = "<p class='error'>Error loading PDF.</p>";
+      }
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault(); 
+    errorMessage.textContent = ''; 
+    message.textContent = ''; 
+
+    const patentNumber = patentNumberInput.value.trim();
+    if (!patentNumber) {
+      errorMessage.textContent = 'Please enter a patent number.';
+      return;
+    }
+
+    try {
+      const response = await fetch('download', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `patentNumber=${patentNumber}`,
+      });
+
+      if (!response.ok) { 
+        const errorData = await response.json(); 
+        const errorMsg = errorData.error || 'Unknown error'; 
+        throw new Error(`Server responded with ${response.status}: ${errorMsg}`);
+      }
+
+      const data = await response.json(); 
+      console.log('Response data:', data); 
+
+      if (data.success) {
+        // Display the initial URL in the viewer
+        pdfViewer.innerHTML = `<p>Fetching URL: ${data.initialUrl}</p>`; 
+
+        if (data.pdfUrl) {
+          // Display the PDF URL in the viewer
+          pdfViewer.innerHTML = `<p>PDF URL: ${data.pdfUrl}</p>`; 
+        }
+
+        // Display the success message from the server
+        message.innerHTML = `<p>${data.message}</p>`; 
+
+        if (data.filename) { 
+          // Construct the URL to the PDF using the /pdf route
+          const pdfUrl = `/pdf/${data.filename}`; 
+
+          // Embed the PDF using the constructed URL
+          pdfViewer.innerHTML = `<iframe src="${pdfUrl}" width="100%" height="100%"></iframe>`; 
+          console.log('PDF embedded:', pdfUrl); 
+        } else {
+          // If no filename, display the success message
+          pdfViewer.innerHTML = `<p>${data.message}</p>`; 
+        }
+
+        // Open PDF in a new tab
+        window.open(data.filename || data.pdfUrl, '_blank'); 
+
+      } else {
+        // Display the error message from the server
+        pdfViewer.innerHTML = `<p class="error">Error: ${data.error}</p>`; 
+        console.error('Error response:', data.error); 
+      }
+
+    } catch (error) {
+      if (error.message.startsWith('Unexpected token')) { 
+        message.innerHTML = '<p>PDF downloaded successfully!</p>'; 
+      } else {
+        errorMessage.textContent = `Error: ${error.message}`; 
+      }
+    }
+  });
+
+
+  function search() {
+    const searchInput = document.getElementById('searchInput');
+    const searchQuery = searchInput.value;
+    alert(`Searching for: ${searchQuery}`);
+  }
+</script>
+
+</body>
+</html>
