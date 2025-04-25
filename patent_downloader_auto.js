@@ -135,7 +135,7 @@ async function processPatentFile(filename) {
     console.log('\x1b[32mAll files processed!\x1b[0m');
     console.log(`\x1b[32mDownloaded ${downloadedCount} out of ${total} attempted.\x1b[0m`);
     if (notFound.length > 0) {
-      console.log('\x1b[31mThe following patent numbers could not be found on Google Patents:\x1b[0m', notFound);
+      console.log('\x1b[31mThe following patent numbers could not be found on Google Patents or already exist in the results directory:\x1b[0m', notFound);
     }
 
   } catch (error) {

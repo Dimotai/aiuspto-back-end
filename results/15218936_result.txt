@@ -1,101 +1,58 @@
 RESULT
 
 {
-  "Extracted claims": [
-    "Claims 1-4, 9, 23, and 15-18",
-    "Claims 1-3, 7, 10, 12-14",
-    "Claims 1, 4-5, 11, 13, 18-21 (alternatively: 1 and 13)",
-    "Claims 6 and 17"
-  ],
-  "Corresponding Rejection Paragraph(s) and related claims": [
-    {
-      "rejection paragraphs": "Paragraph 41",
-      "claims": "Claims 1-3, 7, 10, 12-14",
-      "related prior art references": "<Reference>US4458876</Reference>"
-    },
-    {
-      "rejection paragraphs": "Paragraph 69",
-      "claims": "Claims 1, 4-5, 11, 13, 18-21 (alternatively: 1 and 13)",
-      "related prior art references": "<Reference>US3915426</Reference>"
-    },
-    {
-      "rejection paragraphs": "Paragraphs 123-129",
-      "claims": "Claims 6 and 17",
-      "related prior art references": "<Reference>US4099699</Reference>"
-    }
-  ],
-  "List of related references": [
-    {
-      "references": "<Reference>US4458876</Reference>",
-      "alias": "Schaeper et al.",
-      "corresponding rejection paragraph(s)": "Paragraph 41"
-    },
-    {
-      "references": "<Reference>US3915426</Reference>",
-      "alias": "LeRouax",
-      "corresponding rejection paragraph(s)": "Paragraph 69"
-    },
-    {
-      "references": "<Reference>US4099699</Reference>",
-      "alias": "Allen",
-      "corresponding rejection paragraph(s)": "Paragraphs 123-129"
-    },
-    {
-      "references": "<Reference>US5224557</Reference>",
-      "alias": "Yenulis et al.",
-      "corresponding rejection paragraph(s)": "Paragraphs 108-110, 140-141"
-    },
-    {
-      "references": "<Reference>US2014183381</Reference>",
-      "alias": "Carbaugh et al.",
-      "corresponding rejection paragraph(s)": "Paragraph 134"
-    }
-  ],
-  "U.S. Patent Reference": [
-    {
-      "Patent Number": "4458876",
-      "Designation": "Schaeper et al.",
-      "Citation Type": "102(a)(1)",
-      "Claim number(s)": "Claims 1-3, 7, 10, 12-14"
-    },
-    {
-      "Patent Number": "3915426",
-      "Designation": "LeRouax",
-      "Citation Type": "102(a)(1)",
-      "Claim number(s)": "Claims 1, 4-5, 11, 13, 18-21 (alternatively: 1 and 13)"
-    },
-    {
-      "Patent Number": "4099699",
-      "Designation": "Allen",
-      "Citation Type": "103",
-      "Claim number(s)": "Claims 6 and 17"
-    },
-    {
-      "Patent Number": "5224557",
-      "Designation": "Yenulis et al.",
-      "Citation Type": "103",
-      "Claim number(s)": "Claims 1-3, 7-8, 10, 12-15 (alternatively: 1-3, 7, 10, 12-14), Claims 1, 4-5, 11, 13, 18-21 (alternatively: all)"
-    }
-  ],
-  "U.S. Patent Application Reference": [
-    {
-      "Application number": "2014183381",
-      "Designation": "Carbaugh et al.",
-      "Citation type": "103",
-      "Claim numbers": "Claims 9 and 16"
-    }
-  ],
-  "Paragraph Bullets": [
-    "<Paragraph 41>Regarding claims 1-3, 7, 10, 12-14, <Citation>Schaeper</Citation> is seen as disclosing all of the limitations positively claimed.</Paragraph 41>",
-    "<Paragraph 69>Regarding claims 1, 4-5, 11, 13, 18-21 (alternatively: 1 and 13), <Citation>LeRouax</Citation> is seen as disclosing all of the limitations positively claimed.</Paragraph 69>",
-    "<Paragraph 123>Regarding claims 6 and 17, <Citation>Schaeper</Citation> (alternatively in view of <Citation>Yenulis</Citation>) is silent with regard to the elastic modulus and hardness of the softer material section and elastomeric body, and therefore lacks teaching that the softer material section comprises an elastic modulus that is between about two to 100 times higher than that of the elastomeric material, and the softer material section 52 comprises a hardness that is at least five units (shore A) higher than that of the elastomeric material.</Paragraph 123>",
-    "<Paragraph 124>With regard to elastic modulus, <Citation>Allen</Citation> teaches in Figs. 1-3 a similar BOP comprising a softer material section 32 inserted within a resilient body 38, wherein the softer material section 32 comprises an elastic modulus higher than that of the resilient body 38 so that the resilient body 38 is more readily compressible to perform its intended function of constricting the softer material section 32 (col. 4, lines 3-19).</Paragraph 124>",
-    "<Paragraph 134>Regarding claims 9 and 16, <Citation>Schaeper</Citation> discloses a BOP as previously discussed, but is silent with regard to the specific material of the softer material section, including whether the softer material section comprises a polymer comprising at least one of polyether ether ketone (PEEK), polyethylene terephthalate (PET), polyamide, polymethyl methacrylate (PMMA), polyamide-imide, acrylonitrile-methyl acrylate copolymer, cellulose acetate, polyvinyl fluoride, amorphous nylon, polybutylene terephathalate, polyethylene naphthalate, polyimide, polyacetal, acrylonitrile butadiene styrene copolymer (ABS), ethylene chlorotrifluoroethylene copolymer (ECTFE), polyvinylidene fluoride, polyether sulfone, polyetherimide, polycarbonate and high heat polycarbonate, polybenzimidazole, polyphenylene sulfide, ethylene vinyl alcohol copolymer (EVOH), cycloolefin polymer, cycloolefin copolymer, aromatic fluorine-containing polyarylates ionomer, phenolic resin, epoxy, and polyurethane. <Citation>Carbaugh</Citation> teaches in Figs. 1-5 a similar BOP comprising a resilient material 16 that is designed to seal against an object passing through the housing like the softer material section disclosed by <Citation>Schaeper</Citation>, wherein the resilient material 16 comprises polyamide making up a reinforcing fiber 38 to prevent extrusion of the resilient material when it closes against the object (paragraph 7).</Paragraph 134>"
-  ],
-  "Drawing Paragraph Bullets": [
-    "<Paragraph 8>The drawings are objected to because: Many of the details shown in Figs. 5 and 10-11 are illegible because of the grayscale shading, in which many adjacent structures have similar shadings such that they are indistinguishable from each other.</Paragraph 8>",
-    "<Paragraph 10>Many of the reference numbers in Figs. 3-11 are illegible because they are faintly shown.</Paragraph 10>",
-    "<Paragraph 17>It is suggested that the heading for the background be changed to \"Background of the Invention\" in accordance with MPEP 608.01(a).</Paragraph 17>",
-    "<Paragraph 18>It is suggested a \"Brief Summary of the Invention\" section be included in accordance with MPEP 608.01(a).</Paragraph 18>"
-  ]
+    "Extracted claims": [
+        "Claims 1-4, 9, 23, and 15-18",
+        "Claims 1-3, 7, 10, 12-14",
+        "Claims 1, 4-5, 11, 13, 18-21 (alternatively: 1 and 13)",
+        "Claims 6 and 17",
+        "Claims 9 and 16"
+    ],
+    "Corresponding Rejection Paragraph(s) and related claims": [
+        "35 USC 102(a)(1) - Schaeper et al. (US 4,458,876)",
+        "35 USC 102(a)(1) - LeRouax (US 3,915,426)",
+        "35 USC 103 - Schaeper in view of Yenulis et al. (US 5,224,557)",
+        "35 USC 103 - Schaeper (alternatively in view of Yenulis) in view of Allen (US 4,099,699)",
+        "35 USC 103 - Schaeper (alternatively in view of Yenulis) in view of Carbaugh et al. (US 2014/0183381)"
+    ],
+    "List of related references": [
+        "<Reference>US4458876</Reference> - Schaeper et al.",
+        "<Reference>US3915426</Reference> - LeRouax",
+        "<Reference>US5224557</Reference> - Yenulis et al.",
+        "<Reference>US4099699</Reference> - Allen",
+        "<Reference>US20140183381</Reference> - Carbaugh et al."
+    ],
+    "U.S. Patent Reference": [
+        {
+            "Patent Number": "4,458,876",
+            "Designation": "Schaeper et al.",
+            "Citation Type": "102(a)(1)",
+            "Claim number(s): "1-3, 7, 10, 12-14"
+        },
+        {
+            "Patent Number": "3,915,426",
+            "Designation": "LeRouax",
+            "Citation Type": "102(a)(1)",
+            "Claim number(s): "1, 4-5, 11, 13, 18-21 (alternatively: 1 and 13)"
+        },
+        {
+            "Patent Number": "5,224,557",
+            "Designation": "Yenulis et al.",
+            "Citation Type": "103",
+            "Claim number(s): "1-3, 7, 10, 12-14"
+        },
+        {
+            "Patent Number": "4,099,699",
+            "Designation": "Allen",
+            "Citation Type": "103",
+            "Claim number(s): "6 and 17"
+        },
+        {
+            "Patent Number": "2014/0183381",
+            "Designation": "Carbaugh et al.",
+            "Citation Type": "103",
+            "Claim number(s): "9 and 16"
+        }
+    ],
+    "U.S. Patent Application Reference": []
 }

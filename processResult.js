@@ -1,32 +1,15 @@
 /*
 
-Dependencies:
+Requred dependencies:
 AWS SDK (npm install)
 .env (AWS Secret ID + Key)
 
 Results are stored in local directory and in /results
-Prompts are stored in /prompts
-
-COMPLETED FUNCTIONS
-
-System fetches xml file from PDF for comprehensive analysis
-System connects to AWS model (mutable)
-System sends prompts (AIUSPTO-6 TO 10) with xml file text as source
-AWS returns results under file input name + _results.txt
-System copies results to /results
+A copy of all prompts are stored in /prompts, but only technically used in this code file
 
 TO/DO
 
-processResult.js currently scans directory for input file (.txt or .xml). Need to verify online sources of xml files to allow
-integration of curl/pull xml file from PDF patent file name. This allows seamless PDF front-end GUI display capability in
-congruency to back-end text-format-supported processing.
-Integrate with front-end (independent)
-
-
-NOTES
-
-Claude provides slightly altered (formatting and quality of information) responses every request. Percentage-wise, I'd rate the
-accuracy between responses anywhere from 70-90%. Consider consistently testing with higher-quality AI models.
+Update AWS model from Haiku to Sonnett 3.5 when testing phase is complete
 
 
 */
@@ -96,11 +79,10 @@ async function copyResultToResultsFolder(filename) {
         const sourcePath = filename;
         const destPath = path.join(resultsDir, filename);
 
-        fs.copyFileSync(sourcePath, destPath);
-        console.log(`INFO: Copied "${filename}" to "${resultsDir}" folder.`);
+        console.log(`INFO: (No longer copying) "${filename}" will be in "${resultsDir}" folder.`);
 
     } catch (error) {
-        console.error(`ERROR: Could not copy "${filename}" to "${resultsDir}":`, error);
+        console.error(`ERROR: Could not prepare "${filename}" in "${resultsDir}":`, error);
     }
 }
 
@@ -117,8 +99,8 @@ async function runPatentDownloader(searchResultFilename) {
     console.log(`INFO: Running ${downloaderScript} with results from "${searchResultFilename}".`);
 
     try {
-        const childProcess = spawn('node', [downloaderPath, searchResultFilename], {
-            stdio: 'inherit', // Pipe stdio of the child process to the current process
+        const childProcess = spawn('node', [downloaderPath, path.join('results', searchResultFilename)], {
+            stdio: 'inherit', 
         });
 
         childProcess.on('close', (code) => {
@@ -141,157 +123,160 @@ async function runPatentDownloader(searchResultFilename) {
 }
 
 async function runPatentSearch(resultsFilename) {
-  try {
-      const searchContent = fs.readFileSync(resultsFilename, 'utf-8');
-      console.log(`INFO: Reading results for patent search from "${resultsFilename}".`);
-      const patentSearchPrompt = `
+    try {
+        const searchContent = fs.readFileSync(path.join('results', resultsFilename), 'utf-8'); 
+        console.log(`INFO: Reading results for patent search from "${path.join('results', resultsFilename)}"`);
+        const patentSearchPrompt = `
 
-      Attached is a comprehensive description of patent analysis in JSON format. Analyize further and extract all US-related patents (i.e. US 4,458,876 or 2014/0183381) that are mentioned in this JSON description.
+        Attached is a comprehensive description of patent analysis in JSON format. Analyize further and extract all US-related patents (i.e. US 4,458,876 or 2014/0183381) that are mentioned in this JSON description.
 
-      List ALL patents that are mentioned and format them following the rules mentioned below:
+        List ALL patents that are mentioned and format them following the rules mentioned below:
 
-      Remove all spaces, commas, or slashes separating within the patent name itself. The result should only contain letters (typically "US") and numbers following. For example, "US 4,458,876" would just be "US4458876"
-      If the number does not have US in front of it already, then add US. For example, "2014/0183381" would be "US20140183381"
+        Remove all spaces, commas, or slashes separating within the patent name itself. The result should only contain letters (typically "US") and numbers following. For example, "US 4,458,876" would just be "US4458876"
+        If the number does not have US in front of it already, then add US. For example, "2014/0183381" would be "US20140183381"
 
-      With the list of all patents, compile them into a giant string, separated by commas between each patent. Print the result without a description you (the model) provides describing the result; the result needs to be compatible to be directly copy and pasted into a functioning script.
-      `;
-      const bedrockSearchResult = await processWithBedrock(patentSearchPrompt + searchContent);
-      const searchResultFilename = resultsFilename.replace('_result.txt', '_patent_search_result.txt');
+        With the list of all patents, compile them into a giant string, separated by commas between each patent. Print the result without a description you (the model) provides describing the result; the result needs to be compatible to be directly copy and pasted into a functioning script.
+        `;
+        const bedrockSearchResult = await processWithBedrock(patentSearchPrompt + searchContent);
+        const searchResultFilename = resultsFilename.replace('_result.txt', '_patent_search_result.txt');
+        const fullResultPath = path.join('results', searchResultFilename);
 
-      // Write the Bedrock search result to the file
-      fs.writeFileSync(searchResultFilename, bedrockSearchResult);
-      console.log(`INFO: Patent search results saved to ${searchResultFilename}`);
+        
+        fs.writeFileSync(fullResultPath, bedrockSearchResult);
+        console.log(`INFO: Patent search results saved to ${fullResultPath}`);
 
-      // Now copy the file to the results folder
-      await copyResultToResultsFolder(searchResultFilename);
-      console.log(`INFO: Patent search results copied to ${path.join('results', searchResultFilename)}`);
-
-      await runPatentDownloader(searchResultFilename); // Call the downloader script
-  } catch (error) {
-      console.error('INFO: Error running patent search:', error);
-      readline.close();
-  }
+        await runPatentDownloader(searchResultFilename); 
+    } catch (error) {
+        console.error('INFO: Error running patent search:', error);
+        readline.close();
+    }
 }
 
 async function processResult() {
-  const submissionsDir = 'submissions';
+    const submissionsDir = 'submissions';
+    const resultsDir = 'results';
 
-  try {
-      if (!fs.existsSync(submissionsDir)) {
-          fs.mkdirSync(submissionsDir);
-          console.log(`INFO: Created "${submissionsDir}" directory.`);
-      }
+    try {
+        if (!fs.existsSync(submissionsDir)) {
+            fs.mkdirSync(submissionsDir);
+            console.log(`INFO: Created "${submissionsDir}" directory.`);
+        }
 
-      let filename;
-      let fullFilePath;
-      let fileExists = false;
+        if (!fs.existsSync(resultsDir)) {
+            fs.mkdirSync(resultsDir);
+            console.log(`INFO: Created "${resultsDir}" directory.`);
+        }
 
-      while (!fileExists) {
-          filename = await new Promise((resolve) => {
-              readline.question('Enter the name of the text file (.txt or .xml) in the "submissions" folder: ', resolve);
-          });
+        let filename;
+        let fullFilePath;
+        let fileExists = false;
 
-          fullFilePath = path.join(__dirname, submissionsDir, filename);
+        while (!fileExists) {
+            filename = await new Promise((resolve) => {
+                readline.question('Enter the name of the text file (.txt or .xml) in the "submissions" folder: ', resolve);
+            });
 
-          if (fs.existsSync(fullFilePath)) {
-              fileExists = true;
-              console.log(`INFO: File "${filename}" found in "${submissionsDir}".`);
-          } else {
-              console.log(`INFO: File "${filename}" not found in "${submissionsDir}". Please try again.`);
-          }
-      }
+            fullFilePath = path.join(__dirname, submissionsDir, filename);
 
-      let inputText = fs.readFileSync(fullFilePath, 'utf-8');
+            if (fs.existsSync(fullFilePath)) {
+                fileExists = true;
+                console.log(`INFO: File "${filename}" found in "${submissionsDir}".`);
+            } else {
+                console.log(`INFO: File "${filename}" not found in "${submissionsDir}". Please try again.`);
+            }
+        }
 
-      const fileExtension = filename.split('.').pop().toLowerCase();
-      console.log(`INFO: File type: ${fileExtension}`);
+        let inputText = fs.readFileSync(fullFilePath, 'utf-8');
 
-      if (fileExtension === 'xml') {
-          console.log('INFO: Processing XML file as plain text.');
-      } else if (fileExtension === 'txt') {
-          console.log('INFO: Processing TXT file.');
-      }
+        const fileExtension = filename.split('.').pop().toLowerCase();
+        console.log(`INFO: File type: ${fileExtension}`);
 
-      const predefinedText = `There are 5 (five) steps listed below. Process the prompt marked "PROMPT" first, then print the final result market "RESULT". The source file is marked under "SOURCE".
+        if (fileExtension === 'xml') {
+            console.log('INFO: Processing XML file as plain text.');
+        } else if (fileExtension === 'txt') {
+            console.log('INFO: Processing TXT file.');
+        }
 
-      PROMPT
+        const predefinedText = `There are 5 (five) steps listed below. Process the prompt marked "PROMPT" first, then print the final result market "RESULT". The source file is marked under "SOURCE".
 
-      For all
+        PROMPT
 
-      1. Extract all rejection categories in the requirements provided using the XML-formatted text attached to this request. Also, extract and correctly group ALL claim numbers under each rejection in the same paragraph (e.g., "Claims 1-4, 9, 23, and 15-18"), and include the corresponding rejection type (e.g. “35 USC 102(a)(1)”). Include the prior art references cited in the rejections (e.g. “US 4,458,876”). These prior art references typically have more than 5 digits, ignoring commas or slashes that are separating the digits.
-      Provide me output of all extracted claims in the following format:
+        For all
 
-      Extracted claims:
-      (claim(s))
-      Corresponding Rejection Paragraph(s) and related claims:
-      (rejection paragraphs - claim(s) - related prior art references to the claim, typically have more than 5 digits, ignoring commas or slashes that are separating the digits.)
-      List of related references:
-      (references + alias - corresponding rejection paragraph(s))
+        1. Extract all rejection categories in the requirements provided using the XML-formatted text attached to this request. Also, extract and correctly group ALL claim numbers under each rejection in the same paragraph (e.g., "Claims 1-4, 9, 23, and 15-18"), and include the corresponding rejection type (e.g. “35 USC 102(a)(1)”). Include the prior art references cited in the rejections (e.g. “US 4,458,876”). These prior art references typically have more than 5 digits, ignoring commas or slashes that are separating the digits.
+        Provide me output of all extracted claims in the following format:
 
-      2. Using the XML document attached, extract all detailed reference data for any rejection paragraph that falls under categories 102 or 103. For each of these paragraphs, list me their data in this format:
+        Extracted claims:
+        (claim(s))
+        Corresponding Rejection Paragraph(s) and related claims:
+        (rejection paragraphs - claim(s) - related prior art references to the claim, typically have more than 5 digits, ignoring commas or slashes that are separating the digits.)
+        List of related references:
+        (references + alias - corresponding rejection paragraph(s))
 
-      U.S. Patent Reference:
-      - Patent Number: (number)
-      - Designation: (alias)
-      - Citation Type: (102 or 103 rejection)
-      - Claim number(s): (range of applicable claim numbers)
-      U.S. Patent Application Reference:
-      - Application number: (application number)
-      - Designation: (alias)
-      - Citation type: (102 or 103 rejection)
-      - Claim numbers: (range of applicable claim numbers)
+        2. Using the XML document attached, extract all detailed reference data for any rejection paragraph that falls under categories 102 or 103. For each of these paragraphs, list me their data in this format:
 
-      3. Create and print me a full bullet list of all these requirements.
-      In each bullet, in the XML document attached below, if and for every 102 or 103 rejection-type paragraph (typically starts with “Regarding claim #” or “Regarding claims #-#”), reprint the FULL paragraph. In each printed paragraph, create an in-line tag around each citation (include only the referenced location, typically page/col/line/figure #s between each tag) and all mentioned reference name aliases (i.e. Schaeper, LeRouax, etc.). In addition, create tags around citations specifically (i.e. <Citation>Schaeper</Citation>). The final result should look something like "<Paragraph 41>Regarding claims 1-3, 7, 10, and 12-14, <Citation>Schaeper</Citation> is seen as disclosing all...".
+        U.S. Patent Reference:
+        - Patent Number: (number)
+        - Designation: (alias)
+        - Citation Type: (102 or 103 rejection)
+        - Claim number(s): (range of applicable claim numbers)
+        U.S. Patent Application Reference:
+        - Application number: (application number)
+        - Designation: (alias)
+        - Citation type: (102 or 103 rejection)
+        - Claim numbers: (range of applicable claim numbers)
 
-      4. Create and print me a full bullet list of all these requirements.
-      In each bullet, in the XML document attached below, if in a section with a header “Drawing” or “Specification”, and if a paragraph in this section contains the following key phrase(s):
-      “is objected to because”
-      “it is suggested”
-      “appropriate correction is required”
-      “informalities”
-      Reprint the entire paragraph.
+        3. Create and print me a full bullet list of all these requirements.
+        In each bullet, in the XML document attached below, if and for every 102 or 103 rejection-type paragraph (typically starts with “Regarding claim #” or “Regarding claims #-#”), reprint the FULL paragraph. In each printed paragraph, create an in-line tag around each citation (include only the referenced location, typically page/col/line/figure #s between each tag) and all mentioned reference name aliases (i.e. Schaeper, LeRouax, etc.). In addition, create tags around citations specifically (i.e. <Citation>Schaeper</Citation>). The final result should look something like "<Paragraph 41>Regarding claims 1-3, 7, 10, and 12-14, <Citation>Schaeper</Citation> is seen as disclosing all...".
 
-      RESULT
+        4. Create and print me a full bullet list of all these requirements.
+        In each bullet, in the XML document attached below, if in a section with a header “Drawing” or “Specification”, and if a paragraph in this section contains the following key phrase(s):
+        “is objected to because”
+        “it is suggested”
+        “appropriate correction is required”
+        “informalities”
+        Reprint the entire paragraph.
 
-      After processing and with ENTIRE response after completing the requirements listed above, carefully produce results for each step, and compile them into a full detailed JSON-formatted response.
-      For any references (i.e. Schaeper, LeRouax), wrap the ONLY patent number (typically begins with US) with an HTML tag in format <Reference> & </Reference>, then remove all spaces, commas, and slashes in the patent number itself (the result should look something like "(<Reference>US20140183381</Reference>)" and for the final JSON output, wrap all paragraph numbers from only in sections that include citations.
+        RESULT
 
-      SOURCE
+        After processing and with ENTIRE response after completing the requirements listed above, carefully produce results for each step, and compile them into a full detailed JSON-formatted response.
+        For any references (i.e. Schaeper, LeRouax), wrap the ONLY patent number (typically begins with US) with an HTML tag in format <Reference> & </Reference>, then remove all spaces, commas, and slashes in the patent number itself (the result should look something like "(<Reference>US20140183381</Reference>)" and for the final JSON output, wrap all paragraph numbers from only in sections that include citations.
+
+        SOURCE
 
 
-      `;
-      inputText = predefinedText + inputText;
+        `;
+        inputText = predefinedText + inputText;
 
-      console.log('INFO: File content retrieved and modified.');
+        console.log('INFO: File content retrieved and modified.');
 
-      console.log('INFO: Sending text to AWS Bedrock.');
-      const bedrockResult = await processWithBedrock(inputText);
-      console.log('INFO: AWS Bedrock processing complete.');
+        console.log('INFO: Sending text to AWS Bedrock.');
+        const bedrockResult = await processWithBedrock(inputText);
+        console.log('INFO: AWS Bedrock processing complete.');
 
-      const resultFilename = filename.split('.').slice(0, -1).join('.') + '_result.txt';
-      // Write the result to the current directory first
-      fs.writeFileSync(resultFilename, bedrockResult);
+        const resultFilename = filename.split('.').slice(0, -1).join('.') + '_result.txt';
+        const fullResultPath = path.join(resultsDir, resultFilename);
 
-      await copyResultToResultsFolder(resultFilename);
+        fs.writeFileSync(fullResultPath, bedrockResult);
+        console.log(`INFO: Initial results saved to ${fullResultPath}`);
 
-      console.log(`INFO: Processing complete. Results saved to ${path.join('results', resultFilename)}`);
+        console.log(`INFO: Processing complete. Results saved to ${fullResultPath}`);
 
-      const searchConfirmation = await new Promise((resolve) => {
-          readline.question('Do you wish to run a patent search on the results? (y/n): ', resolve);
-      });
+        const searchConfirmation = await new Promise((resolve) => {
+            readline.question('Do you wish to run a patent search on the results? (y/n): ', resolve);
+        });
 
-      if (searchConfirmation.toLowerCase() === 'y') {
-          await runPatentSearch(resultFilename);
-      } else {
-          console.log('INFO: Exiting script.');
-          readline.close();
-      }
+        if (searchConfirmation.toLowerCase() === 'y') {
+            await runPatentSearch(resultFilename);
+        } else {
+            console.log('INFO: Exiting script.');
+            readline.close();
+        }
 
-  } catch (error) {
-      console.error('INFO: Error processing with AI:', error);
-      readline.close();
-  }
+    } catch (error) {
+        console.error('INFO: Error processing with AI:', error);
+        readline.close();
+    }
 }
 
 async function saveResultToFile(text, filename) {
@@ -318,7 +303,7 @@ function downloadFile(filename) {
 if (require.main === module) {
     processResult();
 } else {
-    // Browser-related code remains the same as it's not the focus of this modification
+    
     document.getElementById('analysisButton').addEventListener('click', async () => {
         const button = document.getElementById('analysisButton');
         button.disabled = true;
