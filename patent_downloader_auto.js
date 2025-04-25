@@ -1,20 +1,19 @@
+const { spawn } = require('child_process');
+const fs = require('fs'); // Correct import for createWriteStream
+const fsPromises = require('fs').promises; // Import promises API separately
+const path = require('path');
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-const { spawn } = require('child_process');
-const fs = require('fs');
+const RESULTS_DIR = 'results';
 
-function getPdfUrl(patentNumber) {
-
+async function getPdfUrl(patentNumber) {
   return new Promise((resolve, reject) => {
     const url = `https://patents.google.com/patent/${patentNumber}`;
-    let pdfUrl = null; // Variable to store the PDF URL
-    
-    console.log(`getPdfUrl: Starting curl for ${patentNumber}`); // Add this line
+    let pdfUrl = null;
     const curlProcess = spawn('curl', [url], { maxBuffer: 1024 * 1024 * 10 });
-    console.log(`getPdfUrl: curl process started for ${patentNumber}`); // Add this line
 
     curlProcess.on('error', (error) => {
       console.error(`Error executing curl for ${patentNumber}: ${error}`);
@@ -25,14 +24,12 @@ function getPdfUrl(patentNumber) {
       const pdfRegex =
         /https:\/\/patentimages\.storage\.googleapis\.com\/(.*?)\.pdf/g;
       const pdfMatch = pdfRegex.exec(data.toString());
-
       if (pdfMatch) {
-        pdfUrl = pdfMatch[0]; // Store the found URL
+        pdfUrl = pdfMatch[0];
       }
     });
 
     curlProcess.on('close', (code) => {
-      console.log(`getPdfUrl: curl process closed for ${patentNumber}, code: ${code}`); // Add this line
       if (code !== 0) {
         console.error(
           `Error executing curl for ${patentNumber}: exit code ${code}`,
@@ -40,10 +37,10 @@ function getPdfUrl(patentNumber) {
         reject(new Error(`curl exited with code ${code}`));
       } else {
         if (pdfUrl) {
-          resolve(pdfUrl); // Resolve with the found URL
+          resolve(pdfUrl);
         } else {
           console.log(`PDF URL not found for ${patentNumber}.`);
-          resolve(null); // Resolve with null if no URL is found
+          resolve(null);
         }
       }
     });
@@ -52,16 +49,13 @@ function getPdfUrl(patentNumber) {
 
 async function downloadPdf(url, filename) {
   return new Promise((resolve, reject) => {
-    console.log(`\x1b[33mDownloading ${filename}...\x1b[0m`);
-
-    const file = fs.createWriteStream(filename);
+    const fullPath = path.join(__dirname, RESULTS_DIR, filename);
+    console.log(`\x1b[33mDownloading ${filename} to ${RESULTS_DIR}...\x1b[0m`);
+    const file = fs.createWriteStream(fullPath); // Save to results directory
     const curl = spawn('curl', ['-L', url]);
-
-    console.log(`downloadPdf: curl process started for ${filename}`); // Add this line
+    let errorData = '';
 
     curl.stdout.pipe(file);
-
-    let errorData = '';
 
     curl.stderr.on('data', (data) => {
       errorData += data;
@@ -74,19 +68,17 @@ async function downloadPdf(url, filename) {
 
     file.on('finish', () => {
       file.close();
-      console.log(`\x1b[32mDownloaded ${filename}\x1b[0m`);
-      console.log(`downloadPdf: Downloaded ${filename}`); // Add this line
+      console.log(`\x1b[32mDownloaded ${filename} to ${RESULTS_DIR}\x1b[0m`);
       resolve();
     });
 
     file.on('error', (error) => {
-      fs.unlink(filename, () => { });
-      console.error(`\x1b[31mError writing to ${filename}: ${error}\x1b[0m`);
+      fsPromises.unlink(fullPath).catch(() => {}); // Use promises for unlink
+      console.error(`\x1b[31mError writing to ${fullPath}: ${error}\x1b[0m`);
       reject(error);
     });
 
     curl.on('close', (code) => {
-      console.log(`downloadPdf: curl process closed for ${filename}, code: ${code}`); // Add this line
       if (code !== 0) {
         const errorMessage = `curl exited with code ${code || 'null'}\nError output: ${errorData}`;
         reject(new Error(errorMessage));
@@ -95,40 +87,79 @@ async function downloadPdf(url, filename) {
   });
 }
 
-
 async function handlePatent(patentNumber) {
   try {
-      const pdfUrl = await getPdfUrl(patentNumber);
-      if (pdfUrl) {
-          const filename = `${patentNumber}.pdf`;
-          await downloadPdf(pdfUrl, filename);
-          return filename; //return filename for stdout.
+    const pdfUrl = await getPdfUrl(patentNumber);
+    if (pdfUrl) {
+      const filename = `${patentNumber}.pdf`;
+      const resultsPath = path.join(__dirname, RESULTS_DIR, filename);
+      if (await fsPromises.access(resultsPath).then(() => true).catch(() => false)) {
+        console.log(`Skipping download of existing file in ${RESULTS_DIR}: ${filename}`);
+        return false;
       }
-      return null; // Return null if patent was not downloaded.
+      await downloadPdf(pdfUrl, filename);
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
-      console.error(`Error processing ${patentNumber}:`, error);
-      return null; //return null on error.
+    console.error(`Error processing ${patentNumber}:`, error);
+    return false;
   }
-} 
+}
+
+async function processPatentFile(filename) {
+  try {
+    const fileContent = await fsPromises.readFile(filename, 'utf8');
+    const patentNumbers = fileContent.split(',').map((p) => p.trim());
+    const total = patentNumbers.length;
+    let downloadedCount = 0;
+    const notFound = [];
+
+    // Ensure results directory exists
+    if (!fs.existsSync(path.join(__dirname, RESULTS_DIR))) {
+      await fsPromises.mkdir(path.join(__dirname, RESULTS_DIR), { recursive: true });
+      console.log(`\x1b[32mCreated "${RESULTS_DIR}" directory.\x1b[0m`);
+    }
+
+    for (const patentNumber of patentNumbers) {
+      const result = await handlePatent(patentNumber);
+      if (result === true) {
+        downloadedCount++;
+      } else if (result === false) {
+        notFound.push(patentNumber);
+      }
+      console.log(`\x1b[34m${downloadedCount}/${total} files processed.\x1b[0m`);
+    }
+
+    console.log('\x1b[32mAll files processed!\x1b[0m');
+    console.log(`\x1b[32mDownloaded ${downloadedCount} out of ${total} attempted.\x1b[0m`);
+    if (notFound.length > 0) {
+      console.log('\x1b[31mThe following patent numbers could not be found on Google Patents:\x1b[0m', notFound);
+    }
+
+  } catch (error) {
+    console.error('\x1b[31mError reading the file:\x1b[0m', error.message);
+    process.exit(1); // Exit on file reading error
+  } finally {
+    readline.close();
+  }
+}
 
 async function main() {
-  console.log('main: process.argv:', process.argv); // Add this line
-  const patentNumbers = process.argv.slice(2); // Get patent numbers from command-line arguments.
-  const total = patentNumbers.length;
-  let downloaded = 0;
-  let downloadedFilenames = [];
-
-  for (const patentNumber of patentNumbers) {
-      const filename = await handlePatent(patentNumber);
-      if (filename) {
-          downloadedFilenames.push(filename);
-          downloaded++;
-          console.log(`\x1b[34m${downloaded}/${total} files downloaded.\x1b[0m`);
-      }
+  const args = process.argv.slice(2);
+  if (args.length !== 1) {
+    console.error('Usage: node patent_downloader_auto.js <patent_list_file.txt>');
+    process.exit(1);
   }
-
-  console.log('\x1b[32mAll files processed!\x1b[0m');
-  console.log(downloadedFilenames.join('\n')); //return the file names to standard out.
+  const filename = args[0];
+  try {
+    await fsPromises.access(filename);
+    await processPatentFile(filename);
+  } catch (error) {
+    console.error('\x1b[31mError accessing the file:\x1b[0m', error.message);
+    process.exit(1);
+  }
 }
 
 main();
